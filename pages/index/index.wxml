@@ -1,0 +1,30 @@
+<view class="flex box box-tb box-align-center">
+  <view class="calendar pink-color box box-tb">
+    <view class="top-handle fs32 box box-lr box-align-center box-pack-center">
+      <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
+        <view class="prev-handle box box-lr box-align-center box-pack-center">《</view>
+      </view>
+      <view class="date-area box box-lr box-align-center box-pack-center">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
+      <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
+        <view class="next-handle box box-lr box-align-center box-pack-center">》</view>
+      </view>
+    </view>
+    <view class="weeks box box-lr box-pack-center box-align-center">
+      <view class="flex week fs32" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
+    </view>
+    <view class="days box box-lr box-wrap fs32">
+      <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
+      </view>
+      <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}">
+        <view wx:if="{{today == index+1}}" class="day border-radius green-bg box box-align-center box-pack-center">{{item}}</view>
+        <view wx:elif="{{ index+1 > today}}" class="day font-gray box box-align-center box-pack-center">{{item}}</view>
+        <view wx:elif="{{activeDays[index]}}" class="day border-radius pink-bg box box-align-center box-pack-center">{{item}}</view>
+        <view wx:else="" class="day  box box-align-center box-pack-center">{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-view">
+    <button disabled="{{disabled}}" size="default" type="primary" bindtap="clickShowToast">打卡</button>
+  </view>
+</view>
